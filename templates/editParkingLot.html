@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Edit parking Lot</h1>
+<label type = 'primelocname'>Prime Location Name : </label> <br>
+<input type = 'primelocname' id = 'primelocname' name = 'primelocname'></input> <br>
+<label type = 'address'>Address :</label> <br>
+<input type = 'address' id = 'address' name = 'address'></input> <br>
+<label type = 'pincode'>Pin code :</label> <br>
+<input type = 'pincode' id = 'pincode' name = 'pincode'></input> <br>
+<label typeprice'>Price(per hour) :</label> <br>
+<input type = 'price' id = 'price' name = 'price'></input> <br>
+<label type = 'maxspots'>Maximum spots :</label> <br>
+<input type = 'maxspots' id = 'maxspots' name = 'maxspots'></input> <br>
+<button type = 'submit'>Update</button>   
+<button type = 'cancel'>cancel</button>
+{% endblock body %}
