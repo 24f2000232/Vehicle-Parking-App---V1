@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking History</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-primary mb-4">
+  <div class="container-fluid justify-content-between">
+    <span class="navbar-brand"> User Dashboard</span>
+    <div>
+      <a href="/my_bookings" class="btn btn-outline-light btn-sm me-2"> Booking History</a>
+      <a href="/edit_profile" class="btn btn-outline-light btn-sm me-2"> Edit Profile</a>
+      <a href="/logout" class="btn btn-danger btn-sm"> Logout</a>
+    </div>
+  </div>
+</nav>
+
+  <div class="container-fluid p-4" style="max-width: 1200px; font-size: 14px;">
+
+    <h2> Booking History</h2>
+    <a href="/user_dashboard" class="btn btn-secondary mb-3"> Back to Dashboard</a>
+
+    {% if records %}
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Lot</th>
+          <th>Spot</th>
+          <th>Car Number</th>
+          <th>Car Model</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Duration (hrs)</th>
+          <th>Cost (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in records %}
+        <tr>
+          <td>{{ r.lot_name }}</td>
+          <td>{{ r.spot_number }}</td>
+          <td>{{ r.car_number or '-' }}</td>
+          <td>{{ r.car_model or '-' }}</td>
+          <td>{{ r.booked_at.strftime('%Y-%m-%d %H:%M') if r.booked_at else '-' }}</td>
+          <td>
+        {% if r.leaving_at %}
+          {{ r.leaving_at.strftime('%Y-%m-%d %H:%M') }}
+        {% else %}
+          <span class="text-warning">Active</span>
+        {% endif %}
+</td>
+
+          <td>{{ r.duration|float|round(2) if r.duration else '-' }}</td>
+          <td>₹{{ r.cost|float|round(2) if r.cost else '-' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    {% else %}
+      <p>No bookings yet.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
