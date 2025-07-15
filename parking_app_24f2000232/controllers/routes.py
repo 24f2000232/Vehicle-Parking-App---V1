@@ -1,4 +1,3 @@
-# Routes
 from flask import render_template, redirect, request, session, jsonify, flash
 from datetime import datetime
 from app import app
