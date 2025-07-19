@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parking Spots</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .spot-card {
+      min-width: 150px;
+      max-width: 200px;
+    }
+    .spot-status {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-dark bg-primary mb-4">
+  <div class="container-fluid justify-content-between">
+    <span class="navbar-brand">🚗 User Dashboard</span>
+    <div>
+      <a href="/user_dashboard" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
+<a href="/my_bookings" class="btn btn-outline-light btn-sm me-2">My Bookings</a>
+<a href="/history" class="btn btn-outline-light btn-sm me-2">History</a>
+<a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ messages[0] }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h4> Parking Spots — Lot {{ lot_id }}</h4>
+  <a href="/user_dashboard" class="btn btn-secondary btn-sm my-3"> Back to Dashboard</a>
+
+  <div class="row g-3">
+    {% for spot in spots %}
+    <div class="col-6 col-md-3 col-lg-2">
+      <div class="card spot-card border {% if spot.is_booked %}border-danger{% else %}border-success{% endif %}">
+        <div class="card-body text-center">
+          <h6 class="card-title">Spot {{ spot.spot_number }}</h6>
+
+          {% if spot.is_booked %}
+            {% if spot.booked_by == session['email'] %}
+              <p class="text-warning spot-status">Booked by You</p>
+              <a href="/release/{{ spot.id }}" class="btn btn-warning btn-sm">Release</a>
+            {% else %}
+              <p class="text-danger spot-status">Occupied</p>
+            {% endif %}
+          {% else %}
+            <p class="text-success spot-status">Available</p>
+            <a href="/book/{{ spot.id }}" class="btn btn-success btn-sm">Book</a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

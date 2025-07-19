@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reserve Spot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary mb-4">
+    <div class="container-fluid justify-content-between">
+      <span class="navbar-brand"> User Dashboard</span>
+      <div>
+        <a href="/user_dashboard" class="nav-link">Dashboard</a>
+        <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container p-4" style="max-width: 700px;">
+    <h4> Reserve Spot in {{ lot.name }}</h4>
+    <form method="POST" class="mt-4">
+      <div class="mb-3">
+        <label class="form-label">Car Number</label>
+        <input type="text" name="car_number" class="form-control" placeholder="MH12AB1234" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Car Model</label>
+        <input type="text" name="car_model" class="form-control" placeholder="Hyundai i20 (optional)">
+      </div>
+      <button type="submit" class="btn btn-success">Reserve Spot</button>
+      <a href="/user_dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
